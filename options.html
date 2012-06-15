@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<title>Fanatic :: Options</title>
+		<link rel="stylesheet" href="options.css" />
+		<link rel="stylesheet" href="colorpicker.css" />
+		<link rel="shortcut icon" href="icons/icon-16.png">
+		<script src="FileSaver.min.js"></script>
+		<script src="zepto.js"></script>
+		<script src="colorpicker.js"></script>
+		<script src="common.js"></script>
+		<script src="settings.js"></script>
+		<script src="options.js"></script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<header>
+				<h1>Fanatic</h1>
+			</header>
+
+			<article>
+				<div id="main">
+					<h2>
+						筛选条件
+						<a class="button apply-settings">应用</a>
+						<span id="add-colorization-filter">染色</span>
+						<span id="add-percolation-filter">过滤</span>
+						<span class="add-filter icon">新增</span>
+					</h2>
+					<section>
+						<ol id="filters-list">
+						</ol>
+					</section>
+					<h2>
+						一般设置
+						<a class="button apply-settings">应用</a>
+					</h2>
+					<section>
+						<ol id="common-setting-list">
+							<li>
+								<h3>染色设置</h3>
+								<label>
+									<input type="checkbox" id="flat-style-colorization" class="checkbox" />
+									启用扁平染色风格
+								</label>
+							</li>
+							<li>
+								<h3>过滤设置</h3>
+								<label>
+									<input type="checkbox" id="auto-load" class="checkbox" />
+									被过滤消息过多时, 自动继续加载
+								</label>
+								<br />
+								<label>
+									延时 <input type="number" id="load-delay" min="200" max="5000" step="100" /> 毫秒后自动加载
+								</label>
+								<span class="comment">
+									延时越小, 加载速度越快, 但可能会不稳定
+								</span>
+							</li>
+							<li class="danger-option">
+								<h3>导入/导出设置</h3>
+								点击<a href="javascript:saveSettingsToFile()" id="output-settings">这里</a>导出设置,
+								或拖拽备份文件到这里导入设置.
+							</li>
+							<li class="danger-option">
+								<h3>初始化设置</h3>
+								点击<a href="javascript:resetSettings()">这里</a>清除所有设置. Fanatic 将会恢复到新安装时的状态.
+								建议在操作前先导出设置.
+							</li>
+							<li class="danger-option-tip">
+								<strong>部分设置项被隐藏. </strong> 点击<a href="options.html" target="_blank">这里</a>查看它们.
+							</li>
+						</ol>
+					</section>
+				</div>
+				<footer>
+					<p><strong>Fanatic</strong> Version <span id="version"></span></p>
+					<p class="gray right">Copyright &copy; 2012 <a href="http://fanfou.com/ruif" target="_blank">Lacc Riophae</a></p>
+				</footer>
+			</article>
+		</div>
+	</body>
+</html>

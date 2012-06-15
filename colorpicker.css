@@ -1,0 +1,68 @@
+@-webkit-keyframes colorPicker-fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: .85;
+	}
+}
+div.colorPicker-picker {
+  height: 16px;
+  width: 16px;
+  padding: 0 !important;
+  background: url(images/arrow.gif) no-repeat top right;
+  cursor: pointer;
+  line-height: 16px;
+	border-radius: 3px 3px 0 3px;
+	-webkit-transition: background .2s linear;
+}
+div.colorPicker-palette {
+  width: 110px;
+  position: absolute;
+	border: 1px solid #ccc;
+	background: rgba(255, 255, 255, .85);
+  padding: 2px;
+  z-index: 9999;
+	overflow: hidden;
+	border-radius: 3px;
+	box-shadow:
+		0 1px 0 #fff inset,
+		0 1px 0 #fff;
+	-webkit-transition: background .2s ease-in-out;
+	-webkit-animation: colorPicker-fadeIn .2s ease-in-out;
+}
+div.colorPicker-palette:hover {
+	background: rgba(255, 255, 255, .95);
+}
+div.colorPicker_hexWrap {
+	width: 100%;
+	float: left;
+}
+div.colorPicker_hexWrap input {
+	margin: 2px;
+	padding: 0;
+	font-size: 95%;
+	border: 1px solid #ccc;
+	width: 104px;
+	text-align: center;
+}
+div.colorPicker-swatch {
+  height: 14px;
+  width: 14px;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+  line-height: 14px;
+	position: relative;
+	border-radius: 3px;
+}
+div.colorPicker-swatch:hover::before {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	content: "";
+	box-shadow: 0 0 15px 3px #ffd700;
+	z-index: 100000;
+}

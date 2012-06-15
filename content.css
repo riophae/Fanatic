@@ -1,0 +1,108 @@
+body:not([fanatic-flat-style-colorization]) #stream li[fanatic-processed="colorized"],
+body:not([fanatic-flat-style-colorization]) #stream li.light[fanatic-processed="colorized"],
+body:not([fanatic-flat-style-colorization]) #stream li.light[fanatic-processed="colorized"]:hover {
+	box-shadow: 0 1px 0 #fff inset;
+	background-image: -webkit-gradient(
+		linear, left top, left bottom,
+		from(rgba(255, 255, 255, .85)),
+		color-stop(.2, rgba(255, 255, 255, .5)),
+		color-stop(.5, rgba(255, 255, 255, .15)),
+		color-stop(.5, transparent),
+		to(transparent)
+	), -webkit-gradient(
+		linear, left bottom, left top,
+		from(rgba(255, 255, 255, .5)),
+		color-stop(.1, rgba(255, 255, 255, .25)),
+		color-stop(.25, rgba(255, 255, 255, 0)),
+		color-stop(.25, transparent),
+		to(transparent)
+	);
+}
+body:not([fanatic-flat-style-colorization]) #stream li.light[fanatic-processed="colorized"]:hover {
+	box-shadow:
+		0 1px 0 #fff inset,
+		0 0 999999px rgba(255, 255, 255, .5) inset;
+}
+body:not([fanatic-flat-style-colorization]) [fanatic-processed="colorized"] .avatar img {
+	border-radius: 2px;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+}
+body:not([fanatic-flat-style-colorization]) [fanatic-processed="colorized"] .avatar {
+	position: relative;
+	padding-bottom: 1px;
+	background: none !important;
+}
+body:not([fanatic-flat-style-colorization]) [fanatic-processed="colorized"] .avatar::after {
+	border-radius: 2px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	content: " ";
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .15) inset;
+	pointer-events: none;
+}
+[fanatic-processed="eliminated"],
+#stream li[fanatic-processed="eliminated"],
+#stream .wa li[fanatic-processed="eliminated"] {
+	padding-left: 42px !important;
+	padding-top: 11px !important;
+	padding-bottom: 3px !important;
+	padding-right: 0 !important;
+	height: 28px !important;
+	min-height: 0 !important;
+	overflow: hidden !important;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	position: relative;
+}
+#stream .wa li[fanatic-processed="eliminated"]:not(.reply) {
+	width: 458px !important;
+}
+#stream .wa li.reply[fanatic-processed="eliminated"] {
+	width: 425px !important;
+}
+[fanatic-processed="eliminated"] > :not(.avatar):not(.content):not(.author),
+[fanatic-processed="eliminated"] .content img {
+	display: none !important;
+}
+[fanatic-processed="eliminated"] .avatar {
+	margin-left: -31px !important;
+	margin-top: -3px !important;
+}
+[fanatic-processed="eliminated"] .avatar img {
+	width: 24px !important;
+	height: 24px !important;
+}
+[fanatic-processed="eliminated"] * {
+	font-size: 12px !important;
+}
+[fanatic-processed="eliminated"] .content {
+	overflow: hidden;
+	white-space: nowrap;
+	display: inline-block;
+	height: 18px;
+}
+[fanatic-processed="eliminated"]:not(.reply) + li.reply,
+[fanatic-processed="eliminated"]:not(.reply) + li[expended].reply + li.reply,
+[fanatic-processed="hidden"]:not(.reply) + li.reply,
+[fanatic-processed="hidden"]:not(.reply) + li[expended].reply + li.reply,
+[fanatic-hidden] {
+	display: none !important;
+}
+[fanatic-processed="eliminated"]::before {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	content: "";
+	background-image: -webkit-gradient(
+		linear, left top, left bottom,
+		from(rgba(255, 255, 255, .75)),
+		to(rgba(255, 255, 255, .25))
+	);
+}
