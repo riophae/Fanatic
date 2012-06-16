@@ -31,6 +31,12 @@ function isPMPage() {
 	return location.href.indexOf(pm_url) === 0;
 }
 
+// 是否为随便看看页面
+function isBrowsingPage() {
+	var browse = 'http://fanfou.com/browse';
+	return location.href.indexOf(browse) === 0;
+}
+
 // 每次加载新消息后, 被隐藏、折叠或清除的消息的数量
 var percolation_count = 0;
 // 如果被过滤消息超过 5 条, 继续加载等同或更多数量的消息
@@ -179,7 +185,7 @@ function onMessage(msg) {
 
 // 启动扩展
 function initialize() {
-	if (! stream || isPMPage()) return;
+	if (! stream || isPMPage() || isBrowsingPage()) return;
 	// 与后台连接, 请求数据
 	var port = ce.connect();
 	port.onMessage.addListener(onMessage);
@@ -566,7 +572,8 @@ function wildcard2regexp(str) {
 // 模拟点击 "更多", 继续加载消息
 function loadMore() {
 	var more = $('pagination-more');
-	more && emulateClick(more, true);
+	if (more && ! more.classList.contains('loading'))
+		emulateClick(more, true);
 }
 
 // 模拟鼠标点击元素
