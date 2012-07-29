@@ -103,6 +103,7 @@ measures.hide = {
 measures.remove = {
 	processed: 'removed',
 	do: function (item) {
+		removeReplies(item);
 		removeElem(item);
 	},
 	undo: function (item) {
@@ -642,6 +643,18 @@ function removeElem(elem) {
 	if (! elem) return;
 	elem.parentNode.removeChild(elem);
 	elem.innerHTML = elem.textContent = '';
+}
+
+// 删除展开消息
+function removeReplies(item) {
+	if (getTagName(item) !== 'li') return;
+	var next = item.nextSibling;
+	while (next && getTagName(next) === 'li' &&
+		next.classList.contains('reply')) {
+		item = next;
+		next = next.nextSibling;
+		removeElem(item);
+	}
 }
 
 // 判断是否为 太空饭否++ 的 "展开评论/转发" 按钮
