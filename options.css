@@ -266,6 +266,9 @@ a {
 #directions h3 {
 	cursor: pointer;
 }
+.pointer {
+	cursor: pointer;
+}
 .link {
 	color: #007bbb;
 }

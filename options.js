@@ -119,6 +119,11 @@ var UI = {
 		callback && callback($option_item);
 		return $option_item;
 	},
+	optionTitle: function(desc, tip) {
+		return $('<h5 />').
+			text(desc).
+			prop('title', tip);
+	},
 	checkbox: function (options) {
 		return $('<label />').
 			append(
@@ -164,6 +169,12 @@ var UI = {
 function bindEvents() {
 	$('.apply-settings').
 	click(applySettings);
+
+	$('#output-settings').
+	click(saveSettingsToFile);
+
+	$('#reset-settings').
+	click(resetSettings);
 
 	$('#add-colorization-filter').
 	click(addColorizationFilter);
@@ -471,44 +482,6 @@ function saveAllFilters(filters) {
 	saveSettings(settings);
 }
 
-/*function compareFilter(a, b) {
-	var keys = ['type', 'measure'];
-	var is_same_type = ! keys.some(function (key) {
-		return a[key] !== b[key];
-	});
-	if (is_same_type) {
-		var focuses = consts.filterBys;
-		var different;
-		return ! focuses.some(function (focus) {
-			for (var key in a[focus]) {
-				if (! b[focus][key] || a[focus][key] !== b[focus][key]) {
-					return true;
-				}
-			}
-			for (var key in b[focus]) {
-				if (! a[focus][key] || a[focus][key] !== b[focus][key]) {
-					return true;
-				}
-			}
-			// 相同
-			return false;
-		});
-	}
-	return false;
-}
-
-function getFilterUID(filter) {
-	var filters = getAllFilters();
-	var iterator;
-	var len = filters.length;
-	while (len--) {
-		iterator = filters[len];
-		if (compareFilter(iterator, filter))
-			return iterator.uid;
-	}
-	return -1;
-}*/
-
 // 查找并处理筛选器
 function handleFilter(uid, callback) {
 	var filters = getAllFilters();
@@ -529,27 +502,6 @@ function getFilter(uid) {
 			completeFilter(filters[i]) : null;
 	});
 }
-
-/*function removeFilter(uid) {
-	return handleFilter(uid, function (filters, i) {
-		if (i > -1) {
-			filters.splice(i, 1);
-			saveAllFilters(filters);
-		}
-		return 1 > -1;
-	});
-}
-
-function setFilter(filter) {
-	return handleFilter(filter.uid, function (filters, i) {
-		if (i > -1) {
-			filters[i] = filter;
-		} else {
-			filters.push(filter);
-		}
-		saveAllFilters(filters);
-	});
-}*/
 
 // 添加染色筛选器
 function addColorizationFilter(e) {
@@ -836,8 +788,14 @@ function renderFilterUI(filter, $filter) {
 
 	// 各种设置项
 	render_options = render_options.concat([
-		UI.textInputOptionItem('作者 ID', 'id'),
-		UI.textInputOptionItem('作者昵称', 'username'),
+		UI.textInputOptionItem(
+			UI.optionTitle('作者 ID', 'ID 指个人页面地址最后的一部分. \n如 http://fanfou.com/fanfou 对应 ID 为 fanfou.'),
+			'id'
+		),
+		UI.textInputOptionItem(
+			UI.optionTitle('作者昵称', '消息作者的用户名'),
+			'username'
+		),
 		UI.textInputOptionItem(
 			'消息内容', 'content',
 			function ($option_item) {
@@ -850,10 +808,22 @@ function renderFilterUI(filter, $filter) {
 			}
 		),
 		UI.textInputOptionItem('客户端', 'client'),
-		UI.textInputOptionItem('@ID', 'mentionedIds'),
-		UI.textInputOptionItem('@昵称', 'mentionedUsernames'),
-		UI.textInputOptionItem('回复昵称', 'replyUsername'),
-		UI.textInputOptionItem('转发昵称', 'repostUsername'),
+		UI.textInputOptionItem(
+			UI.optionTitle('@ID', '消息中提到的用户的 ID'),
+			'mentionedIds'
+		),
+		UI.textInputOptionItem(
+			UI.optionTitle('@昵称', '消息中提到的用户的名字'),
+			'mentionedUsernames'
+		),
+		UI.textInputOptionItem(
+			UI.optionTitle('回复昵称', '消息下方 "给 XX 的回复" 提示里的用户名'),
+			'replyUsername'
+		),
+		UI.textInputOptionItem(
+			UI.optionTitle('转发昵称', '消息下方 "转自 XX" 提示里的用户名'),
+			'repostUsername'
+		),
 		[
 			'匹配逻辑',
 			UI.select([
