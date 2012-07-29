@@ -1,5 +1,7 @@
 {
-	"background_page": "background.html",
+	"background": {
+		"scripts": [ "common.js", "settings.js", "background.js" ]
+	},
 	"content_scripts": [ {
 		"css": [ "content.css" ],
 		"js": [ "common.js", "content.js" ],
@@ -21,5 +23,6 @@
 		"popup": "options.html"
 	},
 	"permissions": [ "http://fanfou.com/*", "tabs" ],
-	"version": "0.1.0"
+	"version": "0.1.0",
+	"manifest_version": 2
 }
