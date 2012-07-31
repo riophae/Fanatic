@@ -20,7 +20,7 @@
 	"page_action": {
 		"default_icon": "icons/icon-19.png",
 		"default_title": "Fanatic",
-		"popup": "options.html"
+		"default_popup": "options.html"
 	},
 	"permissions": [ "http://fanfou.com/*", "tabs" ],
 	"version": "0.1.1",
