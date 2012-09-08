@@ -58,11 +58,21 @@ body:not([fanatic-flat-style-colorization]) [fanatic-processed="colorized"] .ava
 	text-overflow: ellipsis;
 	position: relative;
 }
-#stream .wa li[fanatic-processed="eliminated"]:not(.reply) {
+#stream ol.wa li[fanatic-processed="eliminated"]:not(.reply) {
 	width: 458px !important;
 }
+#stream ol:not(.wa) li[fanatic-processed="eliminated"]:not(.reply) {
+	padding-left: 6px !important;
+	width: 494px !important;
+}
 #stream .wa li.reply[fanatic-processed="eliminated"] {
-	width: 425px !important;
+	width: 430px !important;
+}
+#stream li.reply[fanatic-processed="eliminated"] {
+	width: 380px !important;
+	padding-top: 15px !important;
+	padding-bottom: 5px !important;
+	padding-left: 37px !important;
 }
 [fanatic-processed="eliminated"] > :not(.avatar):not(.content):not(.author),
 [fanatic-processed="eliminated"] .content img {
