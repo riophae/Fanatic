@@ -54,10 +54,10 @@ function mixin(to, from) {
 		if (! from.hasOwnProperty(key)) continue;
 		if (from[key] instanceof Array) {
 			if (typeof to[key] == 'object') {
-				to[key] =	to[key] instanceof Array && to[key].length ?
+				to[key] = to[key] instanceof Array && to[key].length ?
 					to[key].concat(mixin([], from[key])) : mixin(to[key], from[key]);
 			} else {
-				to[key] =	from[key].map(function(item) {
+				to[key] = from[key].map(function(item) {
 					if (item instanceof Array)
 						return mixin([], item);
 					if (item instanceof Object)
