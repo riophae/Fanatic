@@ -373,7 +373,9 @@ function processItem(item) {
 
 // 隐藏消息
 function hideItem(item) {
-	item && item.setAttribute(consts.hiddenAttr, '');
+	if (! item) return;
+	item.setAttribute(consts.hiddenAttr, '');
+	item.classList.remove('buffered');
 }
 
 // 取消隐藏消息
