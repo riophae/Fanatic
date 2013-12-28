@@ -145,7 +145,7 @@ section {
 }
 footer {
 	color: #777;
-	font: 400 11px/1.5 "Hevetica Neue", Hevetica, Arialsans-serif;
+	font: 400 11px/1.5 "Hevetica Neue", Hevetica, Arial, sans-serif;
 	text-shadow: 0 1px 0 #fff;
 	border-top: 1px solid #e7e7e7;
 	box-shadow: 0 1px 0 #fff inset;
