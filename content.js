@@ -215,7 +215,7 @@ function load() {
 	});
 	var act = settings.flatStyleColorization ?
 		'setAttribute' : 'removeAttribute';
-	document.body[act]('fanatic-flat-style-colorization');
+	document.body[act]('fanatic-flat-style-colorization', '');
 }
 
 // 卸载
