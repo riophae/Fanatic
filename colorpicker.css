@@ -6,6 +6,14 @@
 		opacity: .85;
 	}
 }
+@keyframes colorPicker-fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: .85;
+	}
+}
 div.colorPicker-picker {
   height: 16px;
   width: 16px;
@@ -15,6 +23,7 @@ div.colorPicker-picker {
   line-height: 16px;
 	border-radius: 3px 3px 0 3px;
 	-webkit-transition: background .2s linear;
+	transition: background .2s linear;
 }
 div.colorPicker-palette {
   width: 110px;
@@ -29,7 +38,9 @@ div.colorPicker-palette {
 		0 1px 0 #fff inset,
 		0 1px 0 #fff;
 	-webkit-transition: background .2s ease-in-out;
+	transition: background .2s ease-in-out;
 	-webkit-animation: colorPicker-fadeIn .2s ease-in-out;
+	animation: colorPicker-fadeIn .2s ease-in-out;
 }
 div.colorPicker-palette:hover {
 	background: rgba(255, 255, 255, .95);

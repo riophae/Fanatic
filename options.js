@@ -1111,7 +1111,7 @@ delegate('.remove-filter', 'click', function (e) {
 		}
 	).
 	// 缩小
-	height(0);
+	css('height', '0');
 }).
 // 实现筛选器的点击切换
 delegate(consts.flId + ' > li:not(.current) h3', 'click', function (e) {
