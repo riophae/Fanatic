@@ -11,11 +11,13 @@ var $$ = function (selector, parent) {
 var _ = function (selector, parent) {
 	return (arguments.length > 1 ? parent : document).querySelector(selector);
 }
+var MutationObserver = MutationObserver || WebKitMutationObserver;
 
 // 全局变量
 var loaded = false;
 var settings, data;
 var cache;
+var observer; // MutationObserver 实例, 监听消息列表的变化
 var proxies = []; // 事件代理监听器列表
 var attr = consts.processedAttr; // 消息处理方法标记
 
@@ -203,7 +205,17 @@ function load() {
 	// 清空缓存
 	flushCache();
 	// 监听 DOM 树变化
-	stream.addEventListener('DOMNodeInserted', onStreamInserted, false);
+	observer = new MutationObserver(function(mutations) {
+		mutations.forEach(function(mutation) {
+			var added = mutation.addedNodes;
+			var prev = mutation.previousSibling;
+			if (getTagName(prev) === 'ol') {
+				processStream(prev);
+			}
+			forEach(added, processItem);
+		});
+	});
+	observer.observe(stream, { childList: true, subtree: true });
 	// 对页面中已加载的 Timeline 进行处理
 	processStream($$('#stream > ol'));
 	// 实现双击被折叠消息后还原的功能
@@ -224,11 +236,8 @@ function unload() {
 	loaded = false;
 	// 清空缓存
 	flushCache();
-	// 取消事件绑定
-	stream.removeEventListener('DOMNodeInserted', onStreamInserted, false);
-	forEach($$('#stream > ol'), function (ol) {
-		ol.removeEventListener('DOMNodeInserted', onDOMNodeInserted, false);
-	});
+	// 停止监听 DOM 变化
+	observer.disconnect();
 	// 还原处理
 	forEach($$('#stream > ol > li'), recoverItem);
 	forEach($$('[' + consts.hiddenAttr + ']'), showItem);
@@ -437,16 +446,11 @@ function analyseReply(item) {
 function processStream(ol) {
 	ol = typeof ol.length == 'number' ? ol[0] : ol;
 	if (! ol) return;
-	ol.addEventListener('DOMNodeInserted', onDOMNodeInserted, false);
 	forEach($$('li', ol), processItem);
 }
 
 function onDOMNodeInserted(e) {
 	processItem(e.target);
-}
-
-function onStreamInserted(e) {
-	processStream(e.target);
 }
 
 function getUserIdFromURL(link) {
