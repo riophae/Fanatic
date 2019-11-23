@@ -322,7 +322,7 @@ function initDirections() {
 		'窗口标题 / TL上方横条 的新消息数量提示的统计. ',
 
 		'更多颜色请参考' +
-		'<a href="http://www.colordic.org" target="_blank" class="link">' +
+		'<a href="https://www.colordic.org" target="_blank" class="link">' +
 		'原色大辞典</a>.'
 	];
 	$('<li />').
