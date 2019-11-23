@@ -13,24 +13,6 @@ mixin(consts, {
 	]
 });
 
-var BlobBuilder = self.BlobBuilder || self.WebKitBlobBuilder || (function(view) {
-	var
-	FakeBlobBuilder = function () {},
-	FBB_proto = FakeBlobBuilder.prototype = [];
-	FBB_proto.append = function (data) {
-		this.push(data);
-	};
-	FBB_proto.getBlob = function (type) {
-		if (!arguments.length) {
-			type = "application/octet-stream";
-		}
-		return new Blob([ this.join("") ], { type: type });
-	};
-	FBB_proto.toString = function () {
-		return "[object BlobBuilder]";
-	};
-	return FakeBlobBuilder;
-})(self);
 var bg_win = chrome.extension.getBackgroundPage();
 
 // 扩展 Zepto, 增加获取完整高度的方法
@@ -408,9 +390,7 @@ function saveSettingsToFile() {
 	saveAllFilterData();
 	var settings = getSettings();
 	var text = encrypt(settings);
-	var bb = new BlobBuilder;
-	bb.append(text);
-	var blob = bb.getBlob('text/plain');
+	var blob = new Blob([ text ], { type: 'text/plain' });
 	saveAs(blob, consts.stFileName);
 }
 
