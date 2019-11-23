@@ -944,7 +944,7 @@ function createFilter(filter) {
 // 使列表中的筛选器可以通过拖拽排序
 function endraggable($filter) {
 	var $body = $('body');
-	$filter.
+	$filter.find('h3').
 	prop('draggable', true).
 	on('drag', function (e) {
 		// 标记被拖拽的筛选器为被拖拽的源
