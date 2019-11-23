@@ -6,7 +6,6 @@ var $$ = function (selector, parent) {
 var _ = function (selector, parent) {
 	return (arguments.length > 1 ? parent : document).querySelector(selector);
 }
-var MutationObserver = MutationObserver || WebKitMutationObserver;
 
 // 全局变量
 var loaded = false;
@@ -169,6 +168,7 @@ function onMessage(msg) {
 	// 应用新设置
 	case 'update':
 		unload();
+		// fall-through
 	// 初始化扩展
 	case 'init':
 		insertCSS(msg.css);

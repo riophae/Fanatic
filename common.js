@@ -67,16 +67,6 @@ function mixin(to, from) {
 	return to;
 }
 
-// 在字符串中查找某个子字符串, 并返回其前/后字符串
-// 未找到则返回原字符串
-function searchStr(str, dir, patt) {
-	var index = str.indexOf(patt);
-	if (index === -1)
-		return str;
-	return dir == 'after' ?
-			str.slice(index + patt.length) : str.slice(0, index);
-}
-
 // 将 Array 的 forEach 方法应用到所有 ArrayLike 对象
 function forEach(array, func, context) {
 	return Array.prototype.forEach.call(array, func, context);
@@ -89,19 +79,6 @@ function forIn(object, func, context) {
 		if (object.hasOwnProperty(key)) {
 			func.call(context, object[key], key, object);
 		}
-	}
-}
-
-// 参数糅合
-function curry(func) {
-	// 第一个参数为原有的函数
-	// 所有其他参数将传入该函数
-	var slice = Array.prototype.slice;
-	var args = slice.call(arguments, 1);
-	return function () {
-		// 将新传入的参数与 args 糅合在一起一并传入 func
-		return func.apply(this,
-			args.concat(slice.call(arguments, 0)));
 	}
 }
 
