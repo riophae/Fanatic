@@ -1,8 +1,3 @@
-var ce = chrome.extension;
-// Chrome 20 开始启用新的 API, 在老版本中伪造这些 API
-ce.sendMessage = ce.sendMessage || ce.sendRequest;
-ce.onMessage = ce.onMessage || ce.onRequest;
-
 // 选择器相关便捷方法
 var $ = document.getElementById.bind(document);
 var $$ = function (selector, parent) {
@@ -188,7 +183,7 @@ function onMessage(msg) {
 function initialize() {
 	if (! stream || isPMPage() || isBrowsingPage()) return;
 	// 与后台连接, 请求数据
-	var port = ce.connect();
+	var port = chrome.extension.connect();
 	port.onMessage.addListener(onMessage);
 	port.onDisconnect.addListener(function () {
 		// 当扩展停用时, 卸载扩展

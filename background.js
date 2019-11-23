@@ -149,7 +149,7 @@ function getCompleteMsg(type) {
 // 在已打开的页面里加载扩展
 function connectExistingTabs() {
 	// 异步化脚本加载
-	ct.query({}, function (tabs) {
+	chrome.tabs.query({}, function (tabs) {
 		var js_list = content_scripts.js;
 		tabs.forEach(function (tab) {
 			if (tab && checkURL(tab.url)) {
@@ -167,7 +167,7 @@ function connectExistingTabs() {
 
 // 在所有页面显示 PageAction (仅用于测试)
 function _showPageAction() {
-	ct.query({}, function (tabs) {
+	chrome.tabs.query({}, function (tabs) {
 		tabs.forEach(function (tab) {
 			if (tab && tab.id) {
 				chrome.pageAction.show(tab.id);
@@ -177,7 +177,7 @@ function _showPageAction() {
 }
 
 // 监听页面脚本连接
-ce.onConnect.addListener(function (port) {
+chrome.extension.onConnect.addListener(function (port) {
 	var tab_id = port.sender.tab.id;
 	var port_id = 'port_' + tab_id;
 	// 将 port 保存起来, 以供广播之用
@@ -197,7 +197,7 @@ ce.onConnect.addListener(function (port) {
 });
 
 // 保持 PageAction 显示
-ct.onUpdated.addListener(function (_, _, tab) {
+chrome.tabs.onUpdated.addListener(function (_, _, tab) {
 	if (checkURL(tab.url))
 		chrome.pageAction.show(tab.id);
 });

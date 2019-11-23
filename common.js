@@ -1,12 +1,3 @@
-try {
-	// 缩写
-	var ce = chrome.extension;
-	var ct = chrome.tabs;
-	// Chrome 20 开始启用新的 API, 在老版本中伪造这些 API
-	ce.onMessage = ce.onMessage || ce.onRequest;
-	ct.sendMessage = ct.sendMessage || ct.sendRequest;
-} catch (e) { }
-
 // 使 localStorage 可以存储和读取 JSON
 var lspt = localStorage.constructor.prototype;
 lspt.setData = function (key, data) {

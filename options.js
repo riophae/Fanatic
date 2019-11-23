@@ -13,7 +13,6 @@ mixin(consts, {
 	]
 });
 
-ce.sendMessage = ce.sendMessage || ce.sendRequest;
 var BlobBuilder = self.BlobBuilder || self.WebKitBlobBuilder || (function(view) {
 	var
 	FakeBlobBuilder = function () {},
@@ -32,7 +31,7 @@ var BlobBuilder = self.BlobBuilder || self.WebKitBlobBuilder || (function(view) 
 	};
 	return FakeBlobBuilder;
 })(self);
-var bg_win = ce.getBackgroundPage();
+var bg_win = chrome.extension.getBackgroundPage();
 
 // 扩展 Zepto, 增加获取完整高度的方法
 $.fn.fullHeight = function () {
