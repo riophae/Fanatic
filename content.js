@@ -29,14 +29,12 @@ function isUserPage() {
 
 // 是否为私信页
 function isPMPage() {
-	var pm_url = 'http://fanfou.com/privatemsg';
-	return location.href.indexOf(pm_url) === 0;
+	return location.pathname.startsWith('/privatemsg');
 }
 
 // 是否为随便看看页面
 function isBrowsingPage() {
-	var browse = 'http://fanfou.com/browse';
-	return location.href.indexOf(browse) === 0;
+	return location.pathname.startsWith('/browse');
 }
 
 // 每次加载新消息后, 被隐藏、折叠或清除的消息的数量
