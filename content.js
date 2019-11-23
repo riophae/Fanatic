@@ -6,6 +6,15 @@ var $$ = function (selector, parent) {
 var _ = function (selector, parent) {
 	return (arguments.length > 1 ? parent : document).querySelector(selector);
 }
+// 将 HTML 字符串解析为 DOM 对象
+var parseHTML = function (html) {
+	var parser = new DOMParser();
+	var document = parser.parseFromString(html, 'text/html');
+	return document;
+}
+var parseURL = function (url) {
+	return new URL(url);
+}
 
 // 全局变量
 var loaded = false;
@@ -447,21 +456,29 @@ function onDOMNodeInserted(e) {
 }
 
 function getUserIdFromURL(link) {
-	return decodeURIComponent(
-		searchStr(link, 'after', 'http://fanfou.com/')
-	);
+	var { pathname } = parseURL(link);
+	return decodeURIComponent(pathname.replace(/^\//, ''));
 }
 
 function extractUsers(item) {
-	var re = /@<a href="(http:\/\/fanfou\.com)?\/([^"]+)"[^>]*>([^<]+)<\/a>/g;
-	var result, users = [];
-	var html = item.content.innerHTML;
-	while (result = re.exec(html)) {
+	var document = parseHTML(item.content.outerHTML);
+	var users = [];
+	// @到的用户
+	forEach($$('.former', document), function (mentionLink) {
+		var { pathname } = parseURL(mentionLink.href);
 		users.push({
-			id: decodeURIComponent(result[2]),
-			username: result[3]
+			id: pathname.replace(/^\//, ''),
+			username: mentionLink.textContent
 		});
-	}
+	});
+	// @不到的用户
+	forEach($$('.nickquery', document), function (mentionLink) {
+		var username = mentionLink.textContent;
+		users.push({
+			id: username, // id 实际上是拿不到的，用昵称代替
+			username: username
+		});
+	});
 	return users;
 }
 
