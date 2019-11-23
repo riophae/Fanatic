@@ -101,11 +101,6 @@ function forIn(object, func, context) {
 	}
 }
 
-// 判断是否为数组
-function isArray(thing) {
-	return thing instanceof Array;
-}
-
 // 参数糅合
 function curry(func) {
 	// 第一个参数为原有的函数

@@ -48,7 +48,7 @@ function buildCSSCache() {
 	var rgba_colors = settings.filters.
 		filter(function (filter) {
 			return filter.measure === 'colorize' &&
-				isArray(filter.bgColor) &&
+				Array.isArray(filter.bgColor) &&
 				filter.bgColor.length === 3;
 		}).
 		map(function (filter) {

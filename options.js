@@ -1037,7 +1037,7 @@ function hex2rgb(hex) {
 
 // 将由 0~255 组成的 RGB 格式颜色转换为 16 进制颜色
 function rgb2hex(rgb) {
-	rgb = isArray(rgb) ? rgb : [];
+	rgb = Array.isArray(rgb) ? rgb : [];
 	return '#' + rgb.map(function (i) {
 			return pad(i.toString(16));
 		}).
