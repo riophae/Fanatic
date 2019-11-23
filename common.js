@@ -94,3 +94,8 @@ function throttle(func, delay) {
 		}, delay);
 	}
 }
+
+// 将 URL 解析为 domain、pathname、search 等部分
+var parseURL = function (url) {
+	return new URL(url);
+}

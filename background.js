@@ -30,8 +30,9 @@ function initialize() {
 
 function checkURL(url) {
 	if (typeof url != 'string') return false;
-	return url.indexOf('http://fanfou.com/') == 0 &&
-		   url.indexOf('http://fanfou.com/home.2') == -1;
+	var { hostname, pathname } = parseURL(url);
+	// 现在已经不知道这个 http://fanfou.com/home.2 是什么页面了，保留
+	return hostname === 'fanfou.com' && pathname !== '/home.2';
 }
 
 function loadFile(path) {

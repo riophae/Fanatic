@@ -12,9 +12,6 @@ var parseHTML = function (html) {
 	var document = parser.parseFromString(html, 'text/html');
 	return document;
 }
-var parseURL = function (url) {
-	return new URL(url);
-}
 
 // 全局变量
 var loaded = false;
