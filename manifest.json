@@ -23,6 +23,6 @@
 		"default_popup": "options.html"
 	},
 	"permissions": [ "http://fanfou.com/*", "https://fanfou.com/*", "tabs" ],
-	"version": "0.1.8",
+	"version": "0.1.9",
 	"manifest_version": 2
 }
